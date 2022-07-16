@@ -14,8 +14,16 @@
       <input id="four" type="color" value="#fcbf49" />
       <input id="five" type="color" value="#eae2b7" />
       <input type="submit" value="Generate Permutations" />
+      <fieldset>
+        <label>Randomize?<input type="checkbox" id="random" /></label>
+        <label
+          >Border? (optional)
+          <input type="checkbox" id="border" />
+          <input id="borderColor" type="color" value="#05d5ff" />
+        </label>
+      </fieldset>
     </form>
-    <ul id="tiles"></ul>
+    <div id="main"></div>
     <script src="./main.js"></script>
   </body>
 </html>

@@ -1,6 +1,13 @@
-let form = document.getElementById("form");
+const main = document.getElementById("main");
+const form = document.getElementById("form");
+const random = document.getElementById("random");
+const border = document.getElementById("border");
+const borderColor = document.getElementById("borderColor");
+
 form.addEventListener("submit", (ev) => {
   ev.preventDefault();
+  removeAllChildNodes(main);
+  let isRandom = random.checked;
   let colors = [
     document.getElementById("one").value,
     document.getElementById("two").value,
@@ -12,7 +19,9 @@ form.addEventListener("submit", (ev) => {
   let permutations = permutator(colors);
 
   // Shuffle the array
-  permutations = shuffle(permutations);
+  if (isRandom) {
+    permutations = shuffle(permutations);
+  }
 
   permutations.forEach((permutation, index) => {
     let tile = document.createElement("div");
@@ -23,22 +32,30 @@ form.addEventListener("submit", (ev) => {
     tile.style.position = "relative";
     tile.style.left = leftPosition;
     tile.style.top = topPosition;
+
     permutation.forEach((item, index) => {
       let ring = document.createElement("div");
       let offset = 20;
       let size = 100 - offset * Number(index);
+      if (border.checked && index === 0) {
+        ring.style.border = `5px solid ${borderColor.value}`;
+      } else if (border.checked) {
+        size = size - 1;
+        ring.style.left = (offset / 2) * Number(index) + 3;
+        ring.style.top = (offset / 2) * Number(index) + 3;
+      } else {
+        ring.style.left = (offset / 2) * Number(index);
+        ring.style.top = (offset / 2) * Number(index);
+      }
 
       ring.style.position = "absolute";
-      ring.style.right;
       ring.style.width = size;
       ring.style.height = size;
-      ring.style.left = (offset / 2) * Number(index);
-      ring.style.top = (offset / 2) * Number(index);
       ring.style.backgroundColor = item;
       tile.appendChild(ring);
     });
 
-    document.body.appendChild(tile);
+    main.appendChild(tile);
   });
 });
 
@@ -80,4 +97,10 @@ function shuffle(array) {
   }
 
   return array;
+}
+
+function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
 }
