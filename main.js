@@ -11,6 +11,9 @@ form.addEventListener("submit", (ev) => {
 
   let permutations = permutator(colors);
 
+  // Shuffle the array
+  permutations = shuffle(permutations);
+
   permutations.forEach((permutation, index) => {
     let tile = document.createElement("div");
     let totalPosition = 100 * Number(index);
@@ -22,14 +25,15 @@ form.addEventListener("submit", (ev) => {
     tile.style.top = topPosition;
     permutation.forEach((item, index) => {
       let ring = document.createElement("div");
-      let size = 100 - 20 * Number(index);
+      let offset = 40;
+      let size = 100 - offset * Number(index);
 
       ring.style.position = "absolute";
       ring.style.right;
       ring.style.width = size;
       ring.style.height = size;
-      ring.style.left = 10 * Number(index);
-      ring.style.top = 10 * Number(index);
+      ring.style.left = (offset / 2) * Number(index);
+      ring.style.top = (offset / 2) * Number(index);
       ring.style.backgroundColor = item;
       tile.appendChild(ring);
     });
@@ -57,3 +61,23 @@ const permutator = (inputArr) => {
 
   return result;
 };
+
+function shuffle(array) {
+  let currentIndex = array.length,
+    randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
+}
