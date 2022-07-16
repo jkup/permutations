@@ -25,7 +25,7 @@ form.addEventListener("submit", (ev) => {
     tile.style.top = topPosition;
     permutation.forEach((item, index) => {
       let ring = document.createElement("div");
-      let offset = 40;
+      let offset = 20;
       let size = 100 - offset * Number(index);
 
       ring.style.position = "absolute";
