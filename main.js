@@ -4,17 +4,26 @@ const random = document.getElementById("random");
 const border = document.getElementById("border");
 const borderColor = document.getElementById("borderColor");
 
-form.addEventListener("submit", (ev) => {
-  ev.preventDefault();
+let colorInputs = [
+  document.getElementById("one"),
+  document.getElementById("two"),
+  document.getElementById("three"),
+  document.getElementById("four"),
+  document.getElementById("five"),
+];
+
+colorInputs.forEach((input) => {
+  input.addEventListener("change", generatePermutations);
+});
+
+random.addEventListener("change", generatePermutations);
+border.addEventListener("change", generatePermutations);
+borderColor.addEventListener("change", generatePermutations);
+
+function generatePermutations() {
   removeAllChildNodes(main);
   let isRandom = random.checked;
-  let colors = [
-    document.getElementById("one").value,
-    document.getElementById("two").value,
-    document.getElementById("three").value,
-    document.getElementById("four").value,
-    document.getElementById("five").value,
-  ];
+  let colors = colorInputs.map((input) => input.value);
 
   let permutations = permutator(colors);
 
@@ -40,7 +49,6 @@ form.addEventListener("submit", (ev) => {
       if (border.checked && index === 0) {
         ring.style.border = `5px solid ${borderColor.value}`;
       } else if (border.checked) {
-        size = size - 1;
         ring.style.left = (offset / 2) * Number(index) + 3;
         ring.style.top = (offset / 2) * Number(index) + 3;
       } else {
@@ -49,6 +57,7 @@ form.addEventListener("submit", (ev) => {
       }
 
       ring.style.position = "absolute";
+
       ring.style.width = size;
       ring.style.height = size;
       ring.style.backgroundColor = item;
@@ -57,7 +66,7 @@ form.addEventListener("submit", (ev) => {
 
     main.appendChild(tile);
   });
-});
+}
 
 const permutator = (inputArr) => {
   let result = [];
@@ -104,3 +113,7 @@ function removeAllChildNodes(parent) {
     parent.removeChild(parent.firstChild);
   }
 }
+
+window.onload = (event) => {
+  generatePermutations();
+};

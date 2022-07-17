@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2 {
+  margin: 25px 0;
+}
+
+body {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+    Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
+  text-align: center;
+}
+
+fieldset {
+  margin: 25px auto;
+  width: 500px;
+}
+
+#main {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+label {
+  display: block;
+}

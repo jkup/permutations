@@ -4,21 +4,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <h1>Permutation Patterns</h1>
+    <h2>Step 1: Choose colors</h2>
     <form id="form">
       <input id="one" type="color" value="#003049" />
       <input id="two" type="color" value="#d62828" />
       <input id="three" type="color" value="#f77f00" />
       <input id="four" type="color" value="#fcbf49" />
       <input id="five" type="color" value="#eae2b7" />
-      <input type="submit" value="Generate Permutations" />
+      <h2>Step 2: Options</h2>
       <fieldset>
-        <label>Randomize?<input type="checkbox" id="random" /></label>
-        <label
-          >Border? (optional)
+        <label>
+          <input type="checkbox" id="random" />
+          <span>Randomize?</span>
+        </label>
+        <label>
           <input type="checkbox" id="border" />
+          <span>Border? (optional)</span>
           <input id="borderColor" type="color" value="#05d5ff" />
         </label>
       </fieldset>
