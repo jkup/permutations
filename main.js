@@ -36,12 +36,12 @@ function generatePermutations() {
 
   permutations.forEach((permutation, index) => {
     granny.checked
-      ? generateGrannySquare(permutation, main)
-      : generateTiles(permutation, index);
+      ? generateGrannySquare(permutation, main, border)
+      : generateTiles(permutation, index, border);
   });
 }
 
-function generateTiles(colors, index) {
+function generateTiles(colors, index, border) {
   let tile = document.createElement("div");
   let totalPosition = 100 * Number(index);
   let topPosition = Math.floor(totalPosition / 1000) * 100;
@@ -76,14 +76,20 @@ function generateTiles(colors, index) {
   main.appendChild(tile);
 }
 
-function generateGrannySquare(colors, node) {
+function generateGrannySquare(colors, node, border) {
   const canvas = document.createElement("canvas");
-  canvas.width = 190;
-  canvas.height = 190;
+  canvas.width = 95;
+  canvas.height = 95;
+
+  if (border.checked) {
+    canvas.style.border = `4px solid ${borderColor.value}`;
+  }
+
   node.appendChild(canvas);
   const squareSize = 30;
 
   const ctx = canvas.getContext("2d");
+  ctx.scale(0.5, 0.5);
   ctx.fillStyle = "white";
   ctx.fillRect(0, 0, 190, 190);
 
